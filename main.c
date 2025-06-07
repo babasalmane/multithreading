@@ -18,16 +18,15 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // 1. Allouer les matrices
-    long *weights_matrix = create_matrix(ROWS, COLS);       // Matrice n x n
-    long *temperatures_matrix = create_matrix(ROWS, 1);    // Matrice (vecteur) n x 1
-    long *result_matrix = create_matrix(ROWS, 1);          // Matrice résultat n x 1
 
-    // 2. Remplir les matrices avec des valeurs
-    // fill_matrix est conçu pour une matrice 2D, nous l'adaptons un peu ici
-    fill_matrix(weights_matrix, ROWS, COLS); // Remplit la matrice de poids
+    long *weights_matrix = create_matrix(ROWS, COLS);       // matrice n x n
+    long *temperatures_matrix = create_matrix(ROWS, 1);    // matrice (vecteur) n x 1
+    long *result_matrix = create_matrix(ROWS, 1);          // matrice resultat n x 1
+
+    // 2. remplir les matrices avec des valeurs
+    fill_matrix(weights_matrix, ROWS, COLS); //  matrice de poids
     
-    // Remplir manuellement le vecteur de températures
+    //vecteur de temperatures
     printf("Temperature Matrix (vector):\n[");
     for (int i = 0; i < ROWS; i++) {
         temperatures_matrix[i] = i + 1;
@@ -41,14 +40,14 @@ int main(int argc, char *argv[]) {
     printf("\nPress Enter to start calculation...");
     getchar();
 
-    // 3. Lancer le calcul du produit matriciel
+    // 3. lancer le calcul du produit matriciel
     perform_matrix_product(weights_matrix, temperatures_matrix, result_matrix, n_threads);
 
-    // 4. Afficher le résultat
+    // 4. afficher le resultat
     printf("\nResulting Matrix (Poids x Températures):\n");
     print_matrix(result_matrix, ROWS, 1);
 
-    // 5. Libérer la mémoire
+    // 5. liberer la memoire
     free(weights_matrix);
     free(temperatures_matrix);
     free(result_matrix);

@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include "calculator.h"
 
-// La routine du thread calcule une partie des lignes de la matrice résultat
+// la routine du thread calcule une partie des lignes de la matrice resultat
 static void *thread_product_routine(void *arg) {
     struct ThreadArgs *currArg = (struct ThreadArgs *) arg;
     int i, j;
 
-    // Pour chaque ligne assignée à ce thread
+    // pour chaque ligne assigne a ce thread
     for (i = currArg->startRow; i < currArg->startRow + currArg->numRows; i++) {
         long sum = 0;
-        // Calcule le produit scalaire de la ligne i des poids et du vecteur températures
+        // calcule le produit scalaire de la ligne i des poids et du vecteur temperatures
         for (j = 0; j < COLS; j++) {
             sum += currArg->weightsMatrix[i * COLS + j] * currArg->tempMatrix[j];
         }
@@ -30,7 +30,7 @@ void perform_matrix_product(long *weights, long *temperatures, long *result, int
 
     for (i = 0; i < n_threads; i++) {
         threadArgs[i].numRows = rows_per_thread;
-        // Distribue les lignes restantes une par une aux premiers threads
+        // distribue les lignes restantes une par une aux premiers threads
         if (remaining_rows > 0) {
             threadArgs[i].numRows++;
             remaining_rows--;
@@ -46,7 +46,7 @@ void perform_matrix_product(long *weights, long *temperatures, long *result, int
         pthread_create(&threads[i], NULL, thread_product_routine, &threadArgs[i]);
     }
 
-    // Attendre la fin de tous les threads
+    // attendre la fin de tous les threads
     for (i = 0; i < n_threads; i++) {
         pthread_join(threads[i], NULL);
         printf("Thread %d has finished its calculation.\n", i);

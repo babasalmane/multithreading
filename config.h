@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 #define MAX_THREADS 256
-#define ROWS 10 // n
-#define COLS 10 // n
+#define ROWS 10 
+#define COLS 10 
 
-#endif //CONFIG_H
+#endif 
